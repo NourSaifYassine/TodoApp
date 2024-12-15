@@ -1,0 +1,26 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:TodoApp.Models"
+             x:Class="TodoApp.Pages.Controls.TaskView"
+             x:DataType="models:Task">
+    <VerticalStackLayout>
+        <Label Text="{Binding Title}" FontAttributes="Bold" />
+        <Label Text="{Binding Description}" />
+        <Label Text="{Binding DueDate}" />
+
+        <!-- Lijst van Subtaken -->
+        <CollectionView x:Name="SubTasksCollectionView" ItemsSource="{Binding SubTasks}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:SubTask">
+                    <HorizontalStackLayout>
+                        <CheckBox IsChecked="{Binding IsCompleted}" />
+                        <Label Text="{Binding Title}" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Knop om een nieuwe Subtaak toe te voegen -->
+        <Button Text="Voeg Subtaak toe" Clicked="OnAddSubTaskButtonClicked" />
+    </VerticalStackLayout>
+</ContentView>
